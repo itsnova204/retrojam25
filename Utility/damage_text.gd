@@ -2,12 +2,17 @@ extends Label
 
 var lifetime: float = 0.0
 @export var float_speed: float = 50
+@export var default_color: Color = Color(1,1,1)
 
-func show_damage(amount: int, duration: float = 1.0):
+func show_damage(amount: int, color:Color, duration: float = 1.0):
 	text = str(amount)
 	lifetime = duration
 	modulate.a = 1.0
 	visible = true
+	if color:
+		modulate = color
+	else:
+		modulate = default_color
 
 func _process(delta: float) -> void:
 	if visible and lifetime > 0.0:
