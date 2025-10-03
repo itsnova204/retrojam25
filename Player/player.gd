@@ -24,6 +24,7 @@ var javelin = preload("res://Player/Attack/javelin.tscn")
 @onready var tornadoAttackTimer = get_node("%TornadoAttackTimer")
 @onready var javelinBase = get_node("%JavelinBase")
 
+
 #UPGRADES
 var collected_upgrades = []
 var upgrade_options = []
@@ -82,12 +83,15 @@ var last_kills_history = []
 
 #Signal
 signal playerdeath
+@onready var hurtbox = $HurtBox
+
 
 func _ready():
 	upgrade_character("icespear1")
 	attack()
 	set_expbar(experience, calculate_experiencecap())
 	_on_hurt_box_hurt(0,0,0)
+	hurtbox.target= self
 
 func _physics_process(delta):
 	movement()

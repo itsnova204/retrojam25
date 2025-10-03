@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://djx73b1q66t7v"]
+
+[sub_resource type="GDScript" id="GDScript_aksnq"]
+
+[node name="DamageText" type="Label"]
+script = SubResource("GDScript_aksnq")

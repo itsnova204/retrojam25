@@ -29,7 +29,7 @@ signal died(object, experience_value)
 func _ready():
 	anim.play("walk")
 	hitBox.damage = enemy_damage
-	hurtbox.enemy = self
+	hurtbox.target= self
 
 func _physics_process(_delta):
 	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
