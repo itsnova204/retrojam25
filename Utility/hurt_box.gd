@@ -9,7 +9,7 @@ const TypeChart = preload("res://Utility/typechart.gd")
 
 signal hurt(damage, angle, knockback)
 
-var enemy
+var target
 var hit_once_array = []
 
 func _on_area_entered(area):
@@ -38,8 +38,8 @@ func _on_area_entered(area):
 	var knockback = 1
 	
 	var typeDef = TypeChart.Types.NORMAL
-	if enemy.get("type") != null:
-		typeDef = enemy.type
+	if target.get("type") != null:
+		typeDef = target.type
 		
 	var typeAtk = TypeChart.Types.NORMAL
 	if area.get("type") != null:
@@ -55,6 +55,9 @@ func _on_area_entered(area):
 	emit_signal("hurt",damage, angle, knockback)
 	if area.has_method("enemy_hit"):
 		area.enemy_hit(1)
+		
+	var pool = get_tree().current_scene.get_node("DamageTextPool")
+	pool.show_damage(damage, global_position + Vector2(0, -20))
 
 func remove_from_list(object):
 	if hit_once_array.has(object):

@@ -25,3 +25,9 @@ res://Player/Attack/ice_spear.gd
 res://Player/Attack/javelin.gd
 res://Utility/hurt_box.gd
 res://Utility/upgrade_db.gd
+res://Enemy/damage_text.tscn
+res://Enemy/label.gd
+res://World/damage_text_pool.gd
+res://World/damage_text.gd
+res://Utility/damage_text.gd
+res://Utility/DamageText.tscn
