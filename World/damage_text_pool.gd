@@ -4,18 +4,18 @@ var damage_label_scene = preload("res://Utility/DamageText.tscn")
 @export var float_speed: float = 50
 @export var fade_time: float = 1.01
 @export var max_labels: int = 50
+@export var min_labels: int = 5
 
 var labels: Array = []
 
 func _ready():
-	# optionally pre-instantiate a few labels
-	for i in range(5):
+	for i in range(min_labels):
 		var label = damage_label_scene.instantiate()
 		label.visible = false
 		add_child(label)
 		labels.append(label)
 
-func show_damage(amount: int, position: Vector2):
+func show_damage(amount: int, color:Color,position: Vector2):
 	var label = get_free_label()
 	if not label and labels.size() < max_labels:
 		# dynamically create a new label
@@ -26,7 +26,7 @@ func show_damage(amount: int, position: Vector2):
 
 	if label:
 		label.float_speed = float_speed
-		label.show_damage(amount, fade_time)
+		label.show_damage(amount, color, fade_time)
 		label.global_position = position
 	else:
 		print("No free labels available!")
