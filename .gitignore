@@ -31,7 +31,7 @@
 *.aab
 *.uid
 *.import
-
+*.cfg
 # Ignore generated editor/tool temporary files
 # Files created by the editor or external tools that shouldn't be committed.
 *.gltf.bin

@@ -1,7 +1,0 @@
-res://Utility/upgrade_db.gd
-res://Enemy/enemy_juggernaut.tscn
-res://Enemy/enemy.gd
-res://Player/player.gd
-res://Player/player.tscn
-res://Utility/enemy_spawner.gd
-res://Enemy/enemy_cyclops.tscn
