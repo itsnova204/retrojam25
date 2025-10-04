@@ -103,4 +103,15 @@ script = ExtResource("11_ovtx6")
 [node name="DamageTextPool" type="Node2D" parent="."]
 script = ExtResource("12_h2aik")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RedTint" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0.4745098)
+
 [connection signal="playerdeath" from="Player" to="snd_Music" method="_on_player_playerdeath"]

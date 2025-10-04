@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 
-var movement_speed = 40.0
-var hp = 80
+var movement_speed = 100.0
+var hp = 40
 var maxhp = 80
 var last_movement = Vector2.UP
 var time = 0
@@ -38,7 +38,7 @@ var additional_attacks = 0
 #IceSpear
 var icespear_ammo = 0
 var icespear_baseammo = 0
-var icespear_attackspeed = 0.1
+var icespear_attackspeed = 0.5
 var icespear_level = 0
 
 #Tornado
@@ -66,6 +66,9 @@ var enemy_close = []
 @onready var changeTypePanel = get_node("%ChangeType")
 @onready var upgradeOptions = get_node("%UpgradeOptions")
 @onready var typeOptions = get_node("%TypeOptions")
+
+
+@onready var redtint = get_parent().get_node("CanvasLayer/RedTint")
 
 @onready var typeOption = preload("res://Utility/type_option.tscn")
 
@@ -99,6 +102,14 @@ func _physics_process(delta):
 	movement()
 	if Input.is_action_just_pressed("changeType"):
 		openChangeTypePanel()
+	updateTint(delta)
+	
+func updateTint(delta):
+	var intensity = clamp(1.0 - (hp / (maxhp * 0.50)), 0.0, 1.0)
+	if hp < maxhp * 0.50:
+		redtint.color.a = 0.3 + 0.2 * sin(Time.get_ticks_msec() / 200.0 * (1 - hp / maxhp))
+	else:
+		redtint.color.a = lerp(redtint.color.a, 0.0, delta * 5)
 	
 func movement():
 	var x_mov = Input.get_action_strength("right") - Input.get_action_strength("left")
