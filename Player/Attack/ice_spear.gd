@@ -2,14 +2,17 @@ extends Area2D
 
 var level = 1
 var hp = 1
-var speed = 100
+var speed = 1000 * 10000
 var damage = 5
 var knockback_amount = 100
 var attack_size = 1.0
 
+var SPEED = 100 * 3
+
 var target = Vector2.ZERO
 var angle = Vector2.ZERO
 
+@onready var sprite = $Sprite2D
 
 const TypeChart = preload("res://Utility/typechart.gd")
 var type: TypeChart.Types = TypeChart.Types.WATER
@@ -19,10 +22,14 @@ signal remove_from_array(object)
 
 func set_type(newType: TypeChart.Types):
 	type  = newType
+	
+	
 
 func _ready():
 	angle = global_position.direction_to(target)
+	sprite.color = TypeChart.get_type_color(type) 
 	rotation = angle.angle() + deg_to_rad(135)
+
 	match level:
 		1:
 			hp = 1
@@ -55,7 +62,7 @@ func _ready():
 	tween.play()
 
 func _physics_process(delta):
-	position += angle*speed*delta
+	position += angle*SPEED*delta
 
 func enemy_hit(charge = 1):
 	hp -= charge

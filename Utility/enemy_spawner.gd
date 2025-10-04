@@ -24,8 +24,6 @@ func _on_timer_timeout():
 		var enemy_spawn = Enemy.instantiate()
 		if counter % 3 == 0:
 			enemy_spawn.type = TypeChart.Types.LIGHTNING
-		elif true:
-			return
 		elif counter % 3 == 1:
 			enemy_spawn.type = TypeChart.Types.WATER
 		elif counter % 3 == 2:
