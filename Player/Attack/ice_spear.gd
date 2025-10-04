@@ -12,7 +12,7 @@ var angle = Vector2.ZERO
 
 
 const TypeChart = preload("res://Utility/typechart.gd")
-var type: TypeChart.Types = TypeChart.Types.LIGHTNING
+var type: TypeChart.Types = TypeChart.Types.WATER
 
 @onready var player = get_tree().get_first_node_in_group("player")
 signal remove_from_array(object)

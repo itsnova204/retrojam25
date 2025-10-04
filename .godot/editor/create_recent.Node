@@ -1,8 +1,8 @@
+ColorRect
 Label
 Node2D
 Timer
 AudioStreamPlayer
-ColorRect
 Button
 GridContainer
 TextureRect

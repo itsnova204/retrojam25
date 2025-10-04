@@ -3,16 +3,35 @@ extends Node2D
 
 @export var spawns: Array[Spawn_info] = []
 
+
 @onready var player = get_tree().get_first_node_in_group("player")
 
 @export var time = 0
+const Enemy = preload("res://Enemy/enemy_kobold_weak.tscn")
+const TypeChart = preload("res://Utility/typechart.gd")
+
 
 signal changetime(time)
 
 func _ready():
 	connect("changetime",Callable(player,"change_time"))
 
+
 func _on_timer_timeout():
+	time += 1
+	var counter = 0
+	while  counter < 10:
+		var enemy_spawn = Enemy.instantiate()
+		enemy_spawn.color = Color.YELLOW
+		enemy_spawn.type = TypeChart.Types.LIGHTNING
+		enemy_spawn.global_position = get_random_position()
+		add_child(enemy_spawn)
+		counter += 1
+
+
+	emit_signal("changetime",time)
+
+func old_on_timer_timeout():
 	time += 1
 	var enemy_spawns = spawns
 	for i in enemy_spawns:

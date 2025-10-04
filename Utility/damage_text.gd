@@ -7,12 +7,10 @@ var lifetime: float = 0.0
 func show_damage(amount: int, color:Color, duration: float = 1.0):
 	text = str(amount)
 	lifetime = duration
+	print(color)
 	modulate.a = 1.0
 	visible = true
-	if color:
-		modulate = color
-	else:
-		modulate = default_color
+	modulate = color
 
 func _process(delta: float) -> void:
 	if visible and lifetime > 0.0:
