@@ -12,8 +12,7 @@ var knockback = Vector2.ZERO
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
-@onready var sprite = $Sprite2D
-@onready var anim = $AnimationPlayer
+@onready var sprite = $AnimatedSprite2D
 @onready var snd_hit = $snd_hit
 @onready var hitBox = $HitBox
 @onready var hurtbox = $HurtBox
@@ -24,7 +23,18 @@ var exp_gem = preload("res://Objects/experience_gem.tscn")
 signal remove_from_array(object)
 
 func _ready():
-	anim.play("walk")
+	match type:
+		TypeChart.Types.WATER:
+			sprite.play("walk_blue")
+		TypeChart.Types.LIGHTNING:
+			sprite.play("walk_yellow")
+		TypeChart.Types.EARTH:
+			sprite.play("walk_brown")
+		TypeChart.Types.GRASS:
+			sprite.play("walk_green")
+		TypeChart.Types.FIRE:
+			sprite.play("walk_red")
+	
 	hitBox.damage = enemy_damage
 	hurtbox.target= self
 	
