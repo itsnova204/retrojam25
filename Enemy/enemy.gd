@@ -9,7 +9,6 @@ const TypeChart = preload("res://Utility/typechart.gd")
 @export var enemy_damage = 1
 var knockback = Vector2.ZERO
 @export var type: TypeChart.Types = TypeChart.Types.WATER
-@export var color: Color = Color.WHITE
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
@@ -29,7 +28,8 @@ func _ready():
 	anim.play("walk")
 	hitBox.damage = enemy_damage
 	hurtbox.target= self
-	colorrect.color = color
+	
+	colorrect.color = TypeChart.get_type_color(type)
 
 func _physics_process(_delta):
 	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)

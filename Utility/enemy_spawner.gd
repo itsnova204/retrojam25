@@ -22,8 +22,12 @@ func _on_timer_timeout():
 	var counter = 0
 	while  counter < 10:
 		var enemy_spawn = Enemy.instantiate()
-		enemy_spawn.color = Color.YELLOW
-		enemy_spawn.type = TypeChart.Types.LIGHTNING
+		if counter % 3 == 0:
+			enemy_spawn.type = TypeChart.Types.LIGHTNING
+		elif counter % 3 == 1:
+			enemy_spawn.type = TypeChart.Types.WATER
+		elif counter % 3 == 2:
+			enemy_spawn.type = TypeChart.Types.EARTH
 		enemy_spawn.global_position = get_random_position()
 		add_child(enemy_spawn)
 		counter += 1
