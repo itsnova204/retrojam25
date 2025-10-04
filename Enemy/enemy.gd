@@ -21,7 +21,6 @@ var knockback = Vector2.ZERO
 
 var death_anim = preload("res://Enemy/explosion.tscn")
 var exp_gem = preload("res://Objects/experience_gem.tscn")
-
 signal remove_from_array(object)
 
 func _ready():
