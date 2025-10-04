@@ -17,6 +17,8 @@ var type: TypeChart.Types = TypeChart.Types.WATER
 @onready var player = get_tree().get_first_node_in_group("player")
 signal remove_from_array(object)
 
+func set_type(newType: TypeChart.Types):
+	type  = newType
 
 func _ready():
 	angle = global_position.direction_to(target)

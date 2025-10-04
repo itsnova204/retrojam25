@@ -11,6 +11,7 @@ var experience = 0
 var experience_level = 1
 var collected_experience = 0
 
+var  type = 0
 #Attacks
 var iceSpear = preload("res://Player/Attack/ice_spear.tscn")
 var tornado = preload("res://Player/Attack/tornado.tscn")
@@ -62,8 +63,14 @@ var enemy_close = []
 @onready var expBar = get_node("%ExperienceBar")
 @onready var lblLevel = get_node("%lbl_level")
 @onready var levelPanel = get_node("%LevelUp")
+@onready var changeTypePanel = get_node("%ChangeType")
 @onready var upgradeOptions = get_node("%UpgradeOptions")
+@onready var typeOptions = get_node("%TypeOptions")
+
+@onready var typeOption = preload("res://Utility/type_option.tscn")
+
 @onready var itemOptions = preload("res://Utility/item_option.tscn")
+@onready var typeChart = preload("res://Utility/typechart.gd")
 @onready var sndLevelUp = get_node("%snd_levelup")
 @onready var healthBar = get_node("%HealthBar")
 @onready var lblTimer = get_node("%lblTimer")
@@ -90,7 +97,9 @@ func _ready():
 
 func _physics_process(delta):
 	movement()
-
+	if Input.is_action_just_pressed("changeType"):
+		openChangeTypePanel()
+	
 func movement():
 	var x_mov = Input.get_action_strength("right") - Input.get_action_strength("left")
 	var y_mov = Input.get_action_strength("down") - Input.get_action_strength("up")
@@ -139,6 +148,7 @@ func _on_ice_spear_timer_timeout():
 func _on_ice_spear_attack_timer_timeout():
 	if icespear_ammo > 0:
 		var icespear_attack = iceSpear.instantiate()
+		icespear_attack.set_type(type)
 		icespear_attack.position = position
 		icespear_attack.target = get_random_target()
 		icespear_attack.level = icespear_level
@@ -250,6 +260,36 @@ func levelup():
 		upgradeOptions.add_child(option_choice)
 		options += 1
 	get_tree().paused = true
+	
+	
+func openChangeTypePanel():
+	sndLevelUp.play()
+
+	var tween = changeTypePanel.create_tween()
+	tween.tween_property(changeTypePanel,"position",Vector2(220,50),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	tween.play()
+	changeTypePanel.visible = true
+	for type in typeChart.Types.keys():
+		var option_choice = typeOption.instantiate()
+		option_choice.type = type
+		typeOptions.add_child(option_choice)
+
+	get_tree().paused = true
+
+func change_type(newType):
+	type = typeChart.Types[newType]
+	lblLevel.text = str("Type: ", newType)
+	attack()
+	var option_children = typeOptions.get_children()
+	for i in option_children:
+		i.queue_free()
+	upgrade_options.clear()
+
+	changeTypePanel.visible = false
+	changeTypePanel.position = Vector2(800,50)
+	get_tree().paused = false
+	calculate_experience(0)
+
 
 func upgrade_character(upgrade):
 	match upgrade:
