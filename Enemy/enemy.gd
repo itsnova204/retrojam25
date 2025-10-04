@@ -9,7 +9,7 @@ const TypeChart = preload("res://Utility/typechart.gd")
 @export var enemy_damage = 1
 var knockback = Vector2.ZERO
 @export var type: TypeChart.Types = TypeChart.Types.WATER
-
+@export var color: Color = Color.WHITE
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
@@ -18,6 +18,7 @@ var knockback = Vector2.ZERO
 @onready var snd_hit = $snd_hit
 @onready var hitBox = $HitBox
 @onready var hurtbox = $HurtBox
+@onready var colorrect  = $ColorRect
 
 var death_anim = preload("res://Enemy/explosion.tscn")
 var exp_gem = preload("res://Objects/experience_gem.tscn")
@@ -25,11 +26,11 @@ var exp_gem = preload("res://Objects/experience_gem.tscn")
 signal remove_from_array(object)
 signal died(object, experience_value)
 
-
 func _ready():
 	anim.play("walk")
 	hitBox.damage = enemy_damage
 	hurtbox.target= self
+	colorrect.color = color
 
 func _physics_process(_delta):
 	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)

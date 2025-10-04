@@ -18,12 +18,12 @@ static func get_color(attacker: Types, defender: Types) -> Color:
 	var multiplier = Chart[defender][attacker]
 	match multiplier:
 		2.0:
-			return Color(1, 0, 0) 
+			return Color.RED
 		1.2, 1.5:
-			return Color(1,1,0)
-		0.5, 0,8:
-			return Color(0.5, 0.5, 0.5) 
+			return Color.YELLOW
+		0.5, 0.8:
+			return Color.GRAY
 		0.0:
-			return Color(0, 0, 0)       
+			return Color.BLACK     
 		_:
-			return Color(1, 1, 1)  
+			return Color.WHITE
