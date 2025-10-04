@@ -74,6 +74,11 @@ var enemy_close = []
 @onready var sndVictory = get_node("%snd_victory")
 @onready var sndLose = get_node("%snd_lose")
 
+enum TypeChart {WATER, LIGHTING, EARTH, GRASS, FIRE, NORMAL}
+var CurrentPlayerType:TypeChart = TypeChart.NORMAL
+var last_kills_history = [] 
+
+
 #Signal
 signal playerdeath
 
@@ -85,6 +90,34 @@ func _ready():
 
 func _physics_process(delta):
 	movement()
+	
+func add_to_kill_history(enemy_object, exp_value):
+	var kill_data = {
+		"name": enemy_object.name, 
+		"experience": exp_value
+	}
+	var texture_path = ""
+	
+	
+	
+	last_kills_history.insert(0, kill_data)
+	
+	print(last_kills_history)
+	if last_kills_history.size() > 3:
+		last_kills_history.pop_back()
+		
+	if is_instance_valid(enemy_object):
+		var enemy_sprite = enemy_object.get_node_or_null("Sprite2D") 
+		if enemy_sprite and enemy_sprite.texture:
+			texture_path = enemy_sprite.texture.resource_path
+	print(texture_path)
+	sprite.texture = load(texture_path)
+	
+	# print("Last Kills: ", last_kills_history)
+	
+func transformToType(type):
+	CurrentPlayerType = type
+	#add animation to this
 
 func movement():
 	var x_mov = Input.get_action_strength("right") - Input.get_action_strength("left")

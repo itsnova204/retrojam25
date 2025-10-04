@@ -19,6 +19,7 @@ var death_anim = preload("res://Enemy/explosion.tscn")
 var exp_gem = preload("res://Objects/experience_gem.tscn")
 
 signal remove_from_array(object)
+signal died(object, experience_value)
 
 
 func _ready():
@@ -38,7 +39,7 @@ func _physics_process(_delta):
 		sprite.flip_h = false
 
 func death():
-	emit_signal("remove_from_array",self)
+	emit_signal("died", self, experience)
 	var enemy_death = death_anim.instantiate()
 	enemy_death.scale = sprite.scale
 	enemy_death.global_position = global_position
@@ -47,6 +48,7 @@ func death():
 	new_gem.global_position = global_position
 	new_gem.experience = experience
 	loot_base.call_deferred("add_child",new_gem)
+	
 	queue_free()
 
 func _on_hurt_box_hurt(damage, angle, knockback_amount):

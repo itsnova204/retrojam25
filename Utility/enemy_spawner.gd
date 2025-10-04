@@ -21,13 +21,19 @@ func _on_timer_timeout():
 				i.spawn_delay_counter += 1
 			else:
 				i.spawn_delay_counter = 0
-				var new_enemy = i.enemy
+		
+				var new_enemy_scene = i.enemy
+				
 				var counter = 0
-				while  counter < i.enemy_num:
-					var enemy_spawn = new_enemy.instantiate()
+				while counter < i.enemy_num:
+					var enemy_spawn = new_enemy_scene.instantiate()
+					
+					enemy_spawn.died.connect(player.add_to_kill_history)
 					enemy_spawn.global_position = get_random_position()
 					add_child(enemy_spawn)
+					
 					counter += 1
+					
 	emit_signal("changetime",time)
 
 func get_random_position():
