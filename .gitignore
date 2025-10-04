@@ -1,3 +1,44 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+# Godot specific files and folders
+
+# .godot/ is the place for the project-specific cache and local settings.
+# It should generally be ignored, except for files that Godot itself recommends
+# keeping in version control (like version.cfg or certain shader caches).
+# The Godot editor will automatically recreate this folder.
+.godot/
+
+# Ignore C# Godot tools files
+# If you are using C# with Godot.
+**/*.csproj
+**/*.sln
+**/.mono/
+**/.mono
+**/.vs/
+**/*.user
+**/*.suo
+
+# Ignore exported game builds and related files
+# The 'export' folder is a common place for builds.
+/export/
+/builds/
+*.apk
+*.exe
+*.zip
+*.pck
+*.dbg
+*.aab
+*.uid
+*.import
+
+# Ignore generated editor/tool temporary files
+# Files created by the editor or external tools that shouldn't be committed.
+*.gltf.bin
+*.import
+*.mel
+*.obj
+
+# Ignore common OS-specific files
+.DS_Store
+Thumbs.db
