@@ -89,7 +89,17 @@ var enemy_close = []
 @onready var sndVictory = get_node("%snd_victory")
 @onready var sndLose = get_node("%snd_lose")
 
+
 @onready var skull = preload("res://Player/skull.tscn")
+
+var  texts = [load("res://Textures/Player/Blue_Old_Man.png"),
+load("res://Textures/Player/Yellow_Old_Man.png"),
+load("res://Textures/Player/Brown_Old_Man.png"),
+load("res://Textures/Player/Green_Old_Man.png"),
+load("res://Textures/Player/Red_Old_Man.png"),
+load("res://Textures/Player/player_sprite.png"),
+]
+
 
 
 @onready var last_kills_history : Array[bool]  =  [false,false,false,false,false,false]
@@ -285,10 +295,20 @@ func levelup():
 	
 	
 
+func unpause_after(seconds):
+	get_tree().paused = true
+	await get_tree().create_timer(seconds).timeout
+	get_tree().paused = false
 	
 func openChangeTypePanel():
 	
+	var a = skull.instantiate()
+	a.global_position = self.global_position
+	get_parent().add_child(a)
+	sprite.texture = null
 	
+	await unpause_after(1)
+
 	sndLevelUp.play()
 
 	var tween = changeTypePanel.create_tween()
@@ -305,15 +325,14 @@ func openChangeTypePanel():
 
 	get_tree().paused = true
 	
-	var a = skull.instantiate()
-	a.global_position = self.global_position
-	get_parent().add_child(a)
+	
 	
 	
 	
 
 func change_type(newType):
 	type = typeChart.Types[newType]
+	sprite.texture = texts[type]
 	lblLevel.text = str("Type: ", newType)
 	attack()
 	var option_children = typeOptions.get_children()
