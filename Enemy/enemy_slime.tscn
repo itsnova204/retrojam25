@@ -1,4 +1,4 @@
-[gd_scene load_steps=111 format=3 uid="uid://cxcyfcfkxmw86"]
+[gd_scene load_steps=95 format=3 uid="uid://cxcyfcfkxmw86"]
 
 [ext_resource type="Script" uid="uid://bqeu5ec8e7cw0" path="res://Enemy/enemy.gd" id="1_8884f"]
 [ext_resource type="Texture2D" uid="uid://c7l7ggwksuifs" path="res://Textures/Enemy/Blue_slime_V1_animation-Sheet.png" id="2_8884f"]
@@ -201,70 +201,6 @@ region = Rect2(476, 0, 34, 42)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_colyc"]
 atlas = ExtResource("5_358hu")
-region = Rect2(510, 0, 34, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_aa4a8"]
-atlas = ExtResource("2_8884f")
-region = Rect2(0, 0, 34, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rsmpk"]
-atlas = ExtResource("2_8884f")
-region = Rect2(34, 0, 34, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mrxtf"]
-atlas = ExtResource("2_8884f")
-region = Rect2(68, 0, 34, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5b217"]
-atlas = ExtResource("2_8884f")
-region = Rect2(102, 0, 34, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_44rvd"]
-atlas = ExtResource("2_8884f")
-region = Rect2(136, 0, 34, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x1s0o"]
-atlas = ExtResource("2_8884f")
-region = Rect2(170, 0, 34, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5v3c0"]
-atlas = ExtResource("2_8884f")
-region = Rect2(204, 0, 34, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qyog6"]
-atlas = ExtResource("2_8884f")
-region = Rect2(238, 0, 34, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3xkxf"]
-atlas = ExtResource("2_8884f")
-region = Rect2(272, 0, 34, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q6ske"]
-atlas = ExtResource("2_8884f")
-region = Rect2(306, 0, 34, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8x5qp"]
-atlas = ExtResource("2_8884f")
-region = Rect2(340, 0, 34, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sggwk"]
-atlas = ExtResource("2_8884f")
-region = Rect2(374, 0, 34, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6efe0"]
-atlas = ExtResource("2_8884f")
-region = Rect2(408, 0, 34, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i3rj6"]
-atlas = ExtResource("2_8884f")
-region = Rect2(442, 0, 34, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1l62p"]
-atlas = ExtResource("2_8884f")
-region = Rect2(476, 0, 34, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bcnyt"]
-atlas = ExtResource("2_8884f")
 region = Rect2(510, 0, 34, 42)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d4j7o"]
@@ -551,54 +487,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_colyc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_aa4a8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rsmpk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mrxtf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5b217")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_44rvd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x1s0o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5v3c0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qyog6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3xkxf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q6ske")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8x5qp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sggwk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6efe0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_i3rj6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1l62p")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bcnyt")
 }],
 "loop": true,
 "name": &"walk_green",
@@ -735,7 +623,7 @@ script = ExtResource("6_358hu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p7mky")
-animation = &"walk_yellow"
+animation = &"walk_green"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 3)
