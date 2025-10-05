@@ -15,19 +15,31 @@ var angle = Vector2.ZERO
 @onready var sprite = $Sprite2D
 
 const TypeChart = preload("res://Utility/typechart.gd")
-var type: TypeChart.Types = TypeChart.Types.WATER
+var type: TypeChart.Types = TypeChart.Types.NORMAL
+
+
+var  texts = [load("res://Textures/blue_d.png"),
+load("res://Textures/yellow_d.png"),
+load("res://Textures/brown_d.png"),
+load("res://Textures/green_d.png"),
+load("res://Textures/red_d.png"),
+load("res://Textures/Items/Weapons/ice_spear.png"),
+]
 
 @onready var player = get_tree().get_first_node_in_group("player")
 signal remove_from_array(object)
 
 func set_type(newType: TypeChart.Types):
 	type  = newType
+
 	
+
 	
 
 func _ready():
 	angle = global_position.direction_to(target)
-	sprite.color = TypeChart.get_type_color(type) 
+	print(type)
+	sprite.texture = texts[type]
 	rotation = angle.angle() + deg_to_rad(135)
 
 	match level:

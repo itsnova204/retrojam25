@@ -14,11 +14,11 @@ const TypeChart = preload("res://Utility/typechart.gd")
 var total_spawned = 0
 
 var max_at_once = 2
-var spawn_guide  = [[TypeChart.Types.WATER, 0, 30,30],
-		[TypeChart.Types.FIRE, 30, 60,40],
+var spawn_guide  = [[TypeChart.Types.WATER, 0, 30,11],
+		[TypeChart.Types.FIRE, 30, 60,20],
 		[TypeChart.Types.GRASS, 60, 90,10],
-		[TypeChart.Types.LIGHTNING, 90, 120,50],
-		[TypeChart.Types.EARTH, 120, 150,20]]
+		[TypeChart.Types.LIGHTNING, 90, 120,20],
+		[TypeChart.Types.EARTH, 120, 150,12]]
 
 
 signal changetime(time)
@@ -40,11 +40,12 @@ func _on_timer_timeout():
 			continue
 
 		guide[3] = count -1
-		var enemy_spawn = Enemy.instantiate()
-		enemy_spawn.type = t
-		enemy_spawn.global_position = get_random_position()
-		enemy_spawn.died.connect(player.add_to_kill_history)
-		add_child(enemy_spawn)
+		for i in range(0,2):
+			var enemy_spawn = Enemy.instantiate()
+			enemy_spawn.type = t
+			enemy_spawn.global_position = get_random_position()
+			enemy_spawn.died.connect(player.add_to_kill_history)
+			add_child(enemy_spawn)
 		counter += 1
 
 

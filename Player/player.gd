@@ -14,7 +14,6 @@ var collected_experience = 0
 
 var truly_dead = false
 
-var  type = 3
 #Attacks
 var iceSpear = preload("res://Player/Attack/ice_spear.tscn")
 var tornado = preload("res://Player/Attack/tornado.tscn")
@@ -77,6 +76,8 @@ var enemy_close = []
 
 @onready var itemOptions = preload("res://Utility/item_option.tscn")
 @onready var typeChart = preload("res://Utility/typechart.gd")
+@onready var  type = typeChart.Types.NORMAL
+
 @onready var sndLevelUp = get_node("%snd_levelup")
 @onready var healthBar = get_node("%HealthBar")
 @onready var lblTimer = get_node("%lblTimer")

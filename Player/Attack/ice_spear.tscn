@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://wpliv06gy0pq"]
+[gd_scene load_steps=4 format=3 uid="uid://wpliv06gy0pq"]
 
 [ext_resource type="Script" uid="uid://dlmrtfxghrwrm" path="res://Player/Attack/ice_spear.gd" id="1_4el3j"]
-[ext_resource type="Texture2D" uid="uid://jjt1rh5e2jcp" path="res://Textures/Items/Weapons/ice_spear.png" id="1_nhh0e"]
 [ext_resource type="AudioStream" uid="uid://cl3g2vts3nyt0" path="res://Audio/SoundEffect/ice.wav" id="3_esswn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p4tiy"]
@@ -13,11 +12,6 @@ scale = Vector2(0.1, 0.1)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_4el3j")
-
-[node name="Sprite2D3" type="Sprite2D" parent="."]
-unique_name_in_owner = true
-visible = false
-texture = ExtResource("1_nhh0e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
@@ -36,9 +30,7 @@ volume_db = -10.0
 pitch_scale = 5.0
 autoplay = true
 
-[node name="Sprite2D" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(2, 2)
-offset_right = 10.0
-offset_bottom = 10.0
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.9999998, 0.9999998)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
