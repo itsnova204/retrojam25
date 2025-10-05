@@ -11,7 +11,9 @@ var experience = 0
 var experience_level = 1
 var collected_experience = 0
 
-var  type = 0
+var truly_dead = false
+
+var  type = 3
 #Attacks
 var iceSpear = preload("res://Player/Attack/ice_spear.tscn")
 var tornado = preload("res://Player/Attack/tornado.tscn")
@@ -86,6 +88,7 @@ var enemy_close = []
 @onready var sndVictory = get_node("%snd_victory")
 @onready var sndLose = get_node("%snd_lose")
 
+@onready var last_kills_history : Array[bool]  =  [false,false,false,false,false,false]
 #Signal
 signal playerdeath
 @onready var hurtbox = $HurtBox
@@ -101,12 +104,15 @@ func _ready():
 func _physics_process(delta):
 	movement()
 	if Input.is_action_just_pressed("changeType"):
+		for i in range(0,last_kills_history.size()):
+			last_kills_history[i] = true
 		openChangeTypePanel()
 	updateTint(delta)
 	
 func updateTint(delta):
 	# var intensity = clamp(1.0 - (hp / (maxhp * 0.50)), 0.0, 1.0)
-	if hp < maxhp * 0.50:
+	if hp < maxhp * 0.51:
+		_on_hurt_box_hurt(4*delta , 0, 0)
 		redtint.color.a = 0.3 + 0.2 * sin(Time.get_ticks_msec() / 200.0 * (1 - hp / maxhp))
 	else:
 		redtint.color.a = lerp(redtint.color.a, 0.0, delta * 5)
@@ -145,7 +151,8 @@ func attack():
 		spawn_javelin()
 
 func _on_hurt_box_hurt(damage, _angle, _knockback):
-	hp -= clamp(damage-armor, 1.0, 999.0)
+	#hp -= clamp(damage-armor, 1.0, 999.0)
+	hp -= damage
 	healthBar.max_value = maxhp
 	healthBar.value = hp
 	if hp <= 0:
@@ -273,6 +280,8 @@ func levelup():
 	get_tree().paused = true
 	
 	
+
+	
 func openChangeTypePanel():
 	sndLevelUp.play()
 
@@ -280,9 +289,12 @@ func openChangeTypePanel():
 	tween.tween_property(changeTypePanel,"position",Vector2(220,50),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 	tween.play()
 	changeTypePanel.visible = true
-	for t in typeChart.Types.keys():
+	for i in range(0,last_kills_history.size()):
+		if not last_kills_history[i]:
+			continue
+		
 		var option_choice = typeOption.instantiate()
-		option_choice.type = t
+		option_choice.type = typeChart.Types.keys()[i]
 		typeOptions.add_child(option_choice)
 
 	get_tree().paused = true
@@ -300,6 +312,17 @@ func change_type(newType):
 	changeTypePanel.position = Vector2(800,50)
 	get_tree().paused = false
 	calculate_experience(0)
+			
+	var i = 0
+	for _type in typeChart.Types:
+		last_kills_history[i] = false
+		i+=1
+		
+	hp = maxhp
+	
+	healthBar.value = hp
+	
+	
 
 
 func upgrade_character(upgrade):
@@ -411,8 +434,24 @@ func adjust_gui_collection(upgrade):
 					collectedWeapons.add_child(new_item)
 				"upgrade":
 					collectedUpgrades.add_child(new_item)
+				
+
+func rebirth():
+	print(last_kills_history)
+	openChangeTypePanel()
+	return
+
+
+func is_true(a):
+	return a
 
 func death():
+	print(last_kills_history)
+	
+	if last_kills_history.any(is_true):
+		print("hello")
+		return rebirth()
+	
 	deathPanel.visible = true
 	emit_signal("playerdeath")
 	get_tree().paused = true
@@ -430,3 +469,16 @@ func death():
 func _on_btn_menu_click_end():
 	get_tree().paused = false
 	var _level = get_tree().change_scene_to_file("res://TitleScreen/menu.tscn")
+
+
+func add_to_kill_history(enemy_object, exp_value):
+	if  hp > maxhp * 0.51:
+		return
+	print("Kilei")
+	print(enemy_object)
+	print(enemy_object.type)
+	print(last_kills_history)
+
+	last_kills_history[enemy_object.type] = true
+	
+	print(last_kills_history)

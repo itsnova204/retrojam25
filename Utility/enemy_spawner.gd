@@ -11,6 +11,11 @@ const Enemy = preload("res://Enemy/enemy_slime.tscn")
 const TypeChart = preload("res://Utility/typechart.gd")
 
 
+var total_spawned = 0
+
+var max_at_once = 2
+
+
 signal changetime(time)
 
 func _ready():
@@ -20,7 +25,7 @@ func _ready():
 func _on_timer_timeout():
 	time += 1
 	var counter = 0
-	while  counter < 10:
+	while  counter < max_at_once:
 		var enemy_spawn = Enemy.instantiate()
 		if counter % 3 == 0:
 			enemy_spawn.type = TypeChart.Types.LIGHTNING
@@ -29,6 +34,9 @@ func _on_timer_timeout():
 		elif counter % 3 == 2:
 			enemy_spawn.type = TypeChart.Types.EARTH
 		enemy_spawn.global_position = get_random_position()
+		enemy_spawn.died.connect(player.add_to_kill_history)
+
+
 		add_child(enemy_spawn)
 		counter += 1
 

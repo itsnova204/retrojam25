@@ -21,6 +21,8 @@ var knockback = Vector2.ZERO
 var death_anim = preload("res://Enemy/explosion.tscn")
 var exp_gem = preload("res://Objects/experience_gem.tscn")
 signal remove_from_array(object)
+signal died(object, experience_value)
+
 
 func _ready():
 	match type:
@@ -54,6 +56,8 @@ func _physics_process(_delta):
 
 func death():
 	emit_signal("remove_from_array",self)
+	emit_signal("died", self, experience)
+
 	var enemy_death = death_anim.instantiate()
 	enemy_death.scale = sprite.scale
 	enemy_death.global_position = global_position

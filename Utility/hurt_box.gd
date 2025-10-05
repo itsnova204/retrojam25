@@ -57,7 +57,7 @@ func _on_area_entered(area):
 		area.enemy_hit(1)
 		
 	var pool = get_tree().current_scene.get_node("DamageTextPool")
-	print("damage for ", typeAtk," vs ", typeDef,": ", TypeChart.get_multiplier(typeAtk, typeDef), " - ", TypeChart.get_color(typeAtk, typeDef) )
+	# print("damage for ", typeAtk," vs ", typeDef,": ", TypeChart.get_multiplier(typeAtk, typeDef), " - ", TypeChart.get_color(typeAtk, typeDef) )
 	pool.show_damage(damage, TypeChart.get_color(typeAtk, typeDef),global_position + Vector2(0, -20))
 
 func remove_from_list(object):
