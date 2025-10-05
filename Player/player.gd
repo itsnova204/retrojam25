@@ -105,7 +105,7 @@ func _physics_process(delta):
 	updateTint(delta)
 	
 func updateTint(delta):
-	var intensity = clamp(1.0 - (hp / (maxhp * 0.50)), 0.0, 1.0)
+	# var intensity = clamp(1.0 - (hp / (maxhp * 0.50)), 0.0, 1.0)
 	if hp < maxhp * 0.50:
 		redtint.color.a = 0.3 + 0.2 * sin(Time.get_ticks_msec() / 200.0 * (1 - hp / maxhp))
 	else:
@@ -280,9 +280,9 @@ func openChangeTypePanel():
 	tween.tween_property(changeTypePanel,"position",Vector2(220,50),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 	tween.play()
 	changeTypePanel.visible = true
-	for type in typeChart.Types.keys():
+	for t in typeChart.Types.keys():
 		var option_choice = typeOption.instantiate()
-		option_choice.type = type
+		option_choice.type = t
 		typeOptions.add_child(option_choice)
 
 	get_tree().paused = true
