@@ -2,14 +2,15 @@ extends CharacterBody2D
 
 
 var movement_speed = 100.0
-var hp = 40
-var maxhp = 80
+var hp = 10
+var maxhp = 10
 var last_movement = Vector2.UP
 var time = 0
 
 var experience = 0
 var experience_level = 1
 var collected_experience = 0
+
 
 var truly_dead = false
 
@@ -88,6 +89,9 @@ var enemy_close = []
 @onready var sndVictory = get_node("%snd_victory")
 @onready var sndLose = get_node("%snd_lose")
 
+@onready var skull = preload("res://Player/skull.tscn")
+
+
 @onready var last_kills_history : Array[bool]  =  [false,false,false,false,false,false]
 #Signal
 signal playerdeath
@@ -111,8 +115,8 @@ func _physics_process(delta):
 	
 func updateTint(delta):
 	# var intensity = clamp(1.0 - (hp / (maxhp * 0.50)), 0.0, 1.0)
-	if hp < maxhp * 0.51:
-		_on_hurt_box_hurt(4*delta , 0, 0)
+	if hp < maxhp * 0.8:
+		_on_hurt_box_hurt(delta , 0, 0)
 		redtint.color.a = 0.3 + 0.2 * sin(Time.get_ticks_msec() / 200.0 * (1 - hp / maxhp))
 	else:
 		redtint.color.a = lerp(redtint.color.a, 0.0, delta * 5)
@@ -283,6 +287,8 @@ func levelup():
 
 	
 func openChangeTypePanel():
+	
+	
 	sndLevelUp.play()
 
 	var tween = changeTypePanel.create_tween()
@@ -298,6 +304,13 @@ func openChangeTypePanel():
 		typeOptions.add_child(option_choice)
 
 	get_tree().paused = true
+	
+	var a = skull.instantiate()
+	a.global_position = self.global_position
+	get_parent().add_child(a)
+	
+	
+	
 
 func change_type(newType):
 	type = typeChart.Types[newType]
@@ -472,7 +485,7 @@ func _on_btn_menu_click_end():
 
 
 func add_to_kill_history(enemy_object, exp_value):
-	if  hp > maxhp * 0.51:
+	if  hp > maxhp * 0.80:
 		return
 	print("Kilei")
 	print(enemy_object)
