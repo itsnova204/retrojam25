@@ -2,14 +2,15 @@ extends CharacterBody2D
 
 
 var movement_speed = 100.0
-var hp = 40
-var maxhp = 80
+var hp = 10
+var maxhp = 10
 var last_movement = Vector2.UP
 var time = 0
 
 var experience = 0
 var experience_level = 1
 var collected_experience = 0
+
 
 var truly_dead = false
 
@@ -88,6 +89,19 @@ var enemy_close = []
 @onready var sndVictory = get_node("%snd_victory")
 @onready var sndLose = get_node("%snd_lose")
 
+
+@onready var skull = preload("res://Player/skull.tscn")
+
+var  texts = [load("res://Textures/Player/Blue_Old_Man.png"),
+load("res://Textures/Player/Yellow_Old_Man.png"),
+load("res://Textures/Player/Brown_Old_Man.png"),
+load("res://Textures/Player/Green_Old_Man.png"),
+load("res://Textures/Player/Red_Old_Man.png"),
+load("res://Textures/Player/player_sprite.png"),
+]
+
+
+
 @onready var last_kills_history : Array[bool]  =  [false,false,false,false,false,false]
 #Signal
 signal playerdeath
@@ -111,8 +125,8 @@ func _physics_process(delta):
 	
 func updateTint(delta):
 	# var intensity = clamp(1.0 - (hp / (maxhp * 0.50)), 0.0, 1.0)
-	if hp < maxhp * 0.51:
-		_on_hurt_box_hurt(4*delta , 0, 0)
+	if hp < maxhp * 0.8:
+		_on_hurt_box_hurt(delta , 0, 0)
 		redtint.color.a = 0.3 + 0.2 * sin(Time.get_ticks_msec() / 200.0 * (1 - hp / maxhp))
 	else:
 		redtint.color.a = lerp(redtint.color.a, 0.0, delta * 5)
@@ -281,8 +295,20 @@ func levelup():
 	
 	
 
+func unpause_after(seconds):
+	get_tree().paused = true
+	await get_tree().create_timer(seconds).timeout
+	get_tree().paused = false
 	
 func openChangeTypePanel():
+	
+	var a = skull.instantiate()
+	a.global_position = self.global_position
+	get_parent().add_child(a)
+	sprite.texture = null
+	
+	await unpause_after(1)
+
 	sndLevelUp.play()
 
 	var tween = changeTypePanel.create_tween()
@@ -298,9 +324,15 @@ func openChangeTypePanel():
 		typeOptions.add_child(option_choice)
 
 	get_tree().paused = true
+	
+	
+	
+	
+	
 
 func change_type(newType):
 	type = typeChart.Types[newType]
+	sprite.texture = texts[type]
 	lblLevel.text = str("Type: ", newType)
 	attack()
 	var option_children = typeOptions.get_children()
@@ -472,7 +504,7 @@ func _on_btn_menu_click_end():
 
 
 func add_to_kill_history(enemy_object, exp_value):
-	if  hp > maxhp * 0.51:
+	if  hp > maxhp * 0.80:
 		return
 	print("Kilei")
 	print(enemy_object)

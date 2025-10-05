@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://kqark6eb6ghf"]
+
+[ext_resource type="Script" uid="uid://dpjbc6bhpc1dw" path="res://Player/skull.gd" id="1_tjr22"]
+[ext_resource type="Texture2D" uid="uid://bon106psgyirk" path="res://Textures/Enemy/iskull.png" id="2_tjr22"]
+
+[node name="Skull" type="CharacterBody2D"]
+script = ExtResource("1_tjr22")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_tjr22")
