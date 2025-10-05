@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://23spuwo4tq14"]
+
+[ext_resource type="Script" uid="uid://dryscm528x6ng" path="res://Story/menu.gd" id="1_yxep7"]
+[ext_resource type="Texture2D" uid="uid://c2uvpywodl1q4" path="res://Textures/WhatsApp Image 2025-10-05 at 15.19.14.jpeg" id="3_1qubf"]
+[ext_resource type="PackedScene" uid="uid://b7c7gsdx2rkjm" path="res://Utility/basic_button.tscn" id="3_isgsu"]
+[ext_resource type="Texture2D" uid="uid://c6if1kdeg71rv" path="res://Textures/WhatsApp Image 2025-10-05 at 15.19.17.jpeg" id="4_isgsu"]
+[ext_resource type="Texture2D" uid="uid://d3nqagy4sxpt1" path="res://Textures/WhatsApp Image 2025-10-05 at 15.19.18.jpeg" id="5_f28ek"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yxep7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 673.0
+offset_bottom = 382.0
+color = Color(0, 0, 0, 1)
+
+[node name="btn_play" parent="." instance=ExtResource("3_isgsu")]
+layout_mode = 0
+offset_left = 281.0
+offset_top = 318.0
+offset_right = 361.0
+offset_bottom = 348.0
+text = "Play"
+
+[node name="WhatsAppImage20251005At15_19_14" type="Sprite2D" parent="."]
+position = Vector2(522.375, 158.5625)
+scale = Vector2(0.23467542, 0.23467542)
+texture = ExtResource("3_1qubf")
+
+[node name="WhatsAppImage20251005At15_19_17" type="Sprite2D" parent="."]
+position = Vector2(317.5, 158.24998)
+scale = Vector2(0.23437506, 0.23437503)
+texture = ExtResource("4_isgsu")
+
+[node name="WhatsAppImage20251005At15_19_18" type="Sprite2D" parent="."]
+position = Vector2(113.875, 157.8125)
+scale = Vector2(0.23347355, 0.23347357)
+texture = ExtResource("5_f28ek")
+
+[connection signal="click_end" from="btn_play" to="." method="_on_btn_play_click_end"]
