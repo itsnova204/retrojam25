@@ -104,6 +104,7 @@ script = ExtResource("11_ovtx6")
 script = ExtResource("12_h2aik")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
 
 [node name="RedTint" type="ColorRect" parent="CanvasLayer"]
 unique_name_in_owner = true
